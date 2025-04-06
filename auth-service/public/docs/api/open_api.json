@@ -1,0 +1,911 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OpenAPI App",
+    "description": "This is a sample server.",
+    "termsOfService": "http://open-api.io/terms/",
+    "contact": {
+      "name": "API Support",
+      "url": "http://www.open-api.io/support",
+      "email": "support@open-api.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/instructions": {},
+    "/api/v1/token": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Token",
+        "description": "Generate token for user.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "formData",
+            "description": "User email",
+            "required": true,
+            "type": "string",
+            "example": "user@example.com"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "User password",
+            "required": true,
+            "type": "string",
+            "example": "secretpassword"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully generated token",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "etag": {
+                "type": "string",
+                "x-example-value": "W/\"ced176462baaf713272bf4146e235893\""
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "ba8e4a21-2e61-461d-94d8-d8d190b21387"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.026101"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "151"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "token": "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJ1c2VyQGV4YW1wbGUuY29tIiwiZXhwaXJlIjoxNzQzODEwNjM1fQ.jQgvNJV5EmIXDVpaw2peoAjPRRkSqRNzUm1_FogGdes"
+              }
+            }
+          },
+          "401": {
+            "description": "Failed token creation (wrong email)",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "523eac45-a75f-47e0-9b64-bcc399961773"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.000927"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "74"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": [
+                  {
+                    "title": "Invalid email or password",
+                    "code": 401,
+                    "status": 401
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": []
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "List Users",
+        "description": "Retrieve a list of users.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "401": {
+            "description": "Unauthorized access",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "612247c0-5f8b-43e0-a4d0-d08a2d505d2a"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.001505"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "112"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": [
+                  {
+                    "title": "Unauthorized",
+                    "detail": "Unauthorized. Invalid or expired token.",
+                    "code": 401,
+                    "status": 401
+                  }
+                ]
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully retrieved list of users",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "array",
+                  "description": "Data",
+                  "items": {
+                    "type": "object",
+                    "title": "Users Data",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "description": "User ID"
+                      },
+                      "type": {
+                        "type": "string",
+                        "description": "Resource type (e.g., user)"
+                      },
+                      "attributes": {
+                        "type": "object",
+                        "description": "User attributes",
+                        "properties": {
+                          "email": {
+                            "type": "string",
+                            "description": "User email"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "etag": {
+                "type": "string",
+                "x-example-value": "W/\"8cb5186d865d65c8bdc12aba85bbecba\""
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "0ac4e5eb-7d54-4ea7-b56c-e90ea038b5d3"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.005531"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "85"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "id": "1",
+                    "type": "users",
+                    "attributes": {
+                      "email": "fransisca@sipes.example"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create a User",
+        "description": "Creates a new user with provided email and password.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string",
+                      "example": "accounts",
+                      "description": "Resource type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "example": "user@example.com",
+                          "description": "User email"
+                        },
+                        "password": {
+                          "type": "string",
+                          "example": "secretpassword",
+                          "description": "User password"
+                        }
+                      },
+                      "required": [
+                        "email",
+                        "password"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created user",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "description": "Data"
+                }
+              }
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "etag": {
+                "type": "string",
+                "x-example-value": "W/\"0d81cc00525fdd77b3cc925504963590\""
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "d3dce732-03b7-4bdf-8e0c-be1a2ed5a13c"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.002374"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "76"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": {
+                  "id": "1",
+                  "type": "users",
+                  "attributes": {
+                    "email": "user@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Failed user creation (email already taken)",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "e26c227c-1bd3-442f-8c97-5c7bfc9692ec"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.002626"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "96"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": [
+                  {
+                    "title": "Validation failed: Email has already been taken",
+                    "code": 422,
+                    "status": 422
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/{id}": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get User Details",
+        "description": "Retrieve details of a user by ID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized access",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "description": "Errors",
+                  "items": {
+                    "type": "object",
+                    "title": "errors",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title"
+                      },
+                      "detail": {
+                        "type": "string",
+                        "description": "Detail"
+                      },
+                      "code": {
+                        "type": "string",
+                        "description": "Code"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "5df44262-7ab4-4fbb-8fab-4d29fd876584"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.000519"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "112"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": [
+                  {
+                    "title": "Unauthorized",
+                    "detail": "Unauthorized. Invalid or expired token.",
+                    "code": 401,
+                    "status": 401
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "description": "Errors",
+                  "items": {
+                    "type": "object",
+                    "title": "errors",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title"
+                      },
+                      "detail": {
+                        "type": "string",
+                        "description": "Detail"
+                      },
+                      "code": {
+                        "type": "string",
+                        "description": "Code"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "e03b2746-c5ba-407e-b5f0-260bee5d590f"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.000719"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "65"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": [
+                  {
+                    "title": "Record not found",
+                    "code": 404,
+                    "status": 404
+                  }
+                ]
+              }
+            }
+          },
+          "200": {
+            "description": "Successfully retrieved user details",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "description": "ID"
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Document Type"
+                    },
+                    "attributes": {
+                      "type": "object",
+                      "properties": {
+                        "email": {
+                          "type": "string",
+                          "description": "Email"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-frame-options": {
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "etag": {
+                "type": "string",
+                "x-example-value": "W/\"0d81cc00525fdd77b3cc925504963590\""
+              },
+              "cache-control": {
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "x-request-id": {
+                "type": "string",
+                "x-example-value": "58ad8123-8c59-4700-9ac6-a0f1794e7a72"
+              },
+              "x-runtime": {
+                "type": "string",
+                "x-example-value": "0.000815"
+              },
+              "vary": {
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "type": "string",
+                "x-example-value": "76"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": {
+                  "id": "1",
+                  "type": "users",
+                  "attributes": {
+                    "email": "user@example.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "description": "Authorization header JWT Token",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Token",
+      "description": "Token resource"
+    },
+    {
+      "name": "Users",
+      "description": "Users resource"
+    }
+  ]
+}
