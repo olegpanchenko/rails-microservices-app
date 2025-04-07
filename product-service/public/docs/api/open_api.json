@@ -1,0 +1,399 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "OpenAPI Specification",
+    "description": "This is a sample server Petstore server.",
+    "termsOfService": "http://open-api.io/terms/",
+    "contact": {
+      "name": "API Support",
+      "url": "http://www.open-api.io/support",
+      "email": "support@open-api.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "host": "localhost:3000",
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "application/xml"
+  ],
+  "produces": [
+    "application/json",
+    "application/xml"
+  ],
+  "paths": {
+    "/api/v1/products": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "List Products",
+        "description": "Retrieve a list of products.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved list of products",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "x-frame-options": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "etag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"fedb477367b00bde3445e3d12d322247\""
+              },
+              "cache-control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "x-request-id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "e215045b-0b91-4f7b-80ce-0d99eb419fb9"
+              },
+              "x-runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.038244"
+              },
+              "vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "633"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": [
+                  {
+                    "id": "3",
+                    "type": "products",
+                    "attributes": {
+                      "name": "Durable Bronze Coat",
+                      "description": null,
+                      "price": "50.3"
+                    }
+                  },
+                  {
+                    "id": "2",
+                    "type": "products",
+                    "attributes": {
+                      "name": "Heavy Duty Steel Clock",
+                      "description": null,
+                      "price": "49.25"
+                    }
+                  },
+                  {
+                    "id": "1",
+                    "type": "products",
+                    "attributes": {
+                      "name": "Lightweight Iron Wallet",
+                      "description": null,
+                      "price": "23.92"
+                    }
+                  }
+                ],
+                "links": {
+                  "self": "http://example.org/api/v1/products?page%5Bnumber%5D=1&page%5Bsize%5D=20",
+                  "first": "http://example.org/api/v1/products?page%5Bnumber%5D=1&page%5Bsize%5D=20",
+                  "prev": null,
+                  "next": null,
+                  "last": "http://example.org/api/v1/products?page%5Bnumber%5D=1&page%5Bsize%5D=20"
+                }
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    },
+    "/api/v1/products/{id}": {
+      "get": {
+        "tags": [
+          "Products"
+        ],
+        "summary": "Get Product Details",
+        "description": "Retrieve details of a product by ID.",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved product",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {}
+            },
+            "headers": {
+              "x-frame-options": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "etag": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "W/\"83e32e1188d4663d8298d0bae680d67f\""
+              },
+              "cache-control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "max-age=0, private, must-revalidate"
+              },
+              "x-request-id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "b693c16e-484b-4fe3-b258-627d401f84fa"
+              },
+              "x-runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.001679"
+              },
+              "vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "117"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "data": {
+                  "id": "1",
+                  "type": "products",
+                  "attributes": {
+                    "name": "Small Granite Bottle",
+                    "description": null,
+                    "price": "32.22"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Product not found",
+            "schema": {
+              "description": "",
+              "type": "object",
+              "properties": {
+                "errors": {
+                  "type": "array",
+                  "description": "Errors",
+                  "items": {
+                    "type": "object",
+                    "title": "errors",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "Title"
+                      },
+                      "detail": {
+                        "type": "string",
+                        "description": "Detail"
+                      },
+                      "code": {
+                        "type": "string",
+                        "description": "Code"
+                      },
+                      "status": {
+                        "type": "string",
+                        "description": "Status"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "x-frame-options": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "SAMEORIGIN"
+              },
+              "x-xss-protection": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0"
+              },
+              "x-content-type-options": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "nosniff"
+              },
+              "x-permitted-cross-domain-policies": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "none"
+              },
+              "referrer-policy": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "strict-origin-when-cross-origin"
+              },
+              "content-type": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "application/json; charset=utf-8"
+              },
+              "cache-control": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "no-cache"
+              },
+              "x-request-id": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "6f13d2b4-462d-4c4f-9a0f-6cbf58e4e632"
+              },
+              "x-runtime": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "0.001293"
+              },
+              "vary": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "Origin"
+              },
+              "content-length": {
+                "description": "",
+                "type": "string",
+                "x-example-value": "65"
+              }
+            },
+            "examples": {
+              "application/json": {
+                "errors": [
+                  {
+                    "title": "Record not found",
+                    "code": 404,
+                    "status": 404
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "Authorization": []
+          }
+        ]
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Authorization": {
+      "type": "apiKey",
+      "description": "Authorization header JWT Token",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "tags": [
+    {
+      "name": "Products",
+      "description": "Products resource"
+    }
+  ]
+}
