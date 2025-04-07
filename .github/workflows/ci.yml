@@ -1,24 +1,25 @@
 name: CI
 
-on: [push]
+# on: [push]
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   pull_request:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  scan_ruby:
+  # Job for scanning Ruby vulnerabilities for auth-service
+  scan_ruby_auth_service:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up the correct directory
+      - name: Set up the correct directory for auth-service
         run: cd auth-service
 
       - name: Set up Ruby
@@ -27,23 +28,24 @@ jobs:
           ruby-version: "3.2.2"
           bundler-cache: true
 
-      - name: Install dependencies
+      - name: Install dependencies for auth-service
         run: |
           cd auth-service
           bundle install
 
-      - name: Scan for common Rails security vulnerabilities using static analysis
+      - name: Scan for common Rails security vulnerabilities using static analysis for auth-service
         run: |
           cd auth-service
           bundle exec brakeman --no-pager
 
-  lint:
+  # Linting job for auth-service
+  lint_auth_service:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up the correct directory
+      - name: Set up the correct directory for auth-service
         run: cd auth-service
 
       - name: Set up Ruby
@@ -52,27 +54,52 @@ jobs:
           ruby-version: "3.2.2"
           bundler-cache: true
 
-      - name: Lint code for consistent style
+      - name: Lint code for consistent style for auth-service
         run: cd auth-service && bundle install && bin/rubocop -f github
 
-  test:
+  # Test job for auth-service
+  test_auth_service:
     runs-on: ubuntu-latest
 
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
-      - name: Install packages
+      - name: Install packages for auth-service
         run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config google-chrome-stable
 
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up the correct directory
+      - name: Set up the correct directory for auth-service
         run: cd auth-service
+
+      - name: Set up Ruby for auth-service
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2.2"
+          bundler-cache: true
+
+      - name: Run tests for auth-service
+        env:
+          RAILS_ENV: test
+        run: cd auth-service && bundle install && bin/rails db:create db:schema:load spec
+
+      - name: Keep screenshots from failed system tests for auth-service
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/screenshots
+          if-no-files-found: ignore
+
+  # Job for scanning Ruby vulnerabilities for product-service
+  scan_ruby_product_service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up the correct directory for product-service
+        run: cd product-service
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -80,13 +107,61 @@ jobs:
           ruby-version: "3.2.2"
           bundler-cache: true
 
-      - name: Run tests
+      - name: Install dependencies for product-service
+        run: |
+          cd product-service
+          bundle install
+
+      - name: Scan for common Rails security vulnerabilities using static analysis for product-service
+        run: |
+          cd product-service
+          bundle exec brakeman --no-pager
+
+  # Linting job for product-service
+  lint_product_service:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up the correct directory for product-service
+        run: cd product-service
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2.2"
+          bundler-cache: true
+
+      - name: Lint code for consistent style for product-service
+        run: cd product-service && bundle install && bin/rubocop -f github
+
+  # Test job for product-service
+  test_product_service:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install packages for product-service
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libyaml-dev pkg-config google-chrome-stable
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up the correct directory for product-service
+        run: cd product-service
+
+      - name: Set up Ruby for product-service
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2.2"
+          bundler-cache: true
+
+      - name: Run tests for product-service
         env:
           RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-        run: cd auth-service && bundle install && bin/rails db:setup spec
+        run: cd product-service && bundle install && bin/rails db:create db:schema:load spec
 
-      - name: Keep screenshots from failed system tests
+      - name: Keep screenshots from failed system tests for product-service
         uses: actions/upload-artifact@v4
         if: failure()
         with:
