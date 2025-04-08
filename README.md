@@ -23,6 +23,9 @@ microservices/
 │ ├── app/
 │ ├── config/
 │ └── db/
+├── frontend-app/ # next app
+│ ├── app/
+│ ├── config/
 ├── docker-compose.yml # For orchestrating the services using Docker
 ├── nginx.conf
 └── config/
