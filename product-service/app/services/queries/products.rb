@@ -18,20 +18,20 @@ module Queries
     end
 
     def filter_by_owner
-      return if @options[:owner_id].nil?
+      return if @options[:owner_id].blank?
 
       @scope = @scope.where(arel_table[:owner_id].eq(@options[:owner_id]))
     end
 
     def filter_by_name
-      return if @options[:name].nil?
+      return if @options[:name].blank?
 
       @scope = @scope.where(arel_table[:name].matches("%#{@options[:name]}%"))
     end
 
     def filter_by_price
-      @scope = @scope.where(arel_table[:price].gteq(@options[:price_min])) if @options[:price_min]
-      @scope = @scope.where(arel_table[:price].lteq(@options[:price_max])) if @options[:price_max]
+      @scope = @scope.where(arel_table[:price].gteq(@options[:price_min])) if @options[:price_min].present?
+      @scope = @scope.where(arel_table[:price].lteq(@options[:price_max])) if @options[:price_max].present?
     end
   end
 end

@@ -1,0 +1,42 @@
+version: "3"
+
+services:
+  auth_service:
+    build:
+      context: ./auth-service
+    environment:
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./auth-service:/app
+    networks:
+      - backend
+
+  product_service:
+    build:
+      context: ./product-service
+    environment:
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE}
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./product-service:/app
+    networks:
+      - backend
+
+  nginx:
+    image: nginx:latest
+    depends_on:
+      - auth_service
+      - product_service
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "8888:8080"
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
