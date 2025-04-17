@@ -39,10 +39,10 @@ class Api::V1::OrderItemsController < Api::V1::ApplicationController
         ],
         relationships: [
           order: {
-            data: [:id, :type]
+            data: [ :id, :type ]
           },
           product: {
-            data: [:id, :type]
+            data: [ :id, :type ]
           }
         ]
       ]

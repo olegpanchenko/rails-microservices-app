@@ -14,7 +14,7 @@ module Products
         product = Product.lock.find(@product_id) # SELECT FOR UPDATE
         new_inventory = product.inventory + @dff
         raise "Sold out" if new_inventory < 0
-      
+
         product.update(inventory: new_inventory)
       end
     end

@@ -7,7 +7,7 @@ class Order < ApplicationRecord
     User.new(id: user_id)
   end
 
-  def user=user
+  def user=(user)
     self.user_id = user.id
   end
 end
