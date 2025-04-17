@@ -9,4 +9,8 @@ class User
   def persisted?
     false
   end
+
+  def orders
+    Order.where(user_id: self.id)
+  end
 end

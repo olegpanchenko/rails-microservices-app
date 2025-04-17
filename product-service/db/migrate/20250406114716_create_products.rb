@@ -3,6 +3,7 @@ class CreateProducts < ActiveRecord::Migration[8.0]
     create_table :products do |t|
       t.integer :owner_id, index: true, null: false
       t.string :name
+      t.integer :inventory, default: 0
       t.decimal :price, precision: 10, scale: 2
       t.text :description
 
