@@ -83,7 +83,7 @@ jobs:
         run: cd auth-service && bundle install && bin/rails db:create db:schema:load spec
 
       - name: Keep screenshots from failed system tests for auth-service
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: screenshots
@@ -162,7 +162,7 @@ jobs:
         run: cd product-service && bundle install && bin/rails db:create db:schema:load spec
 
       - name: Keep screenshots from failed system tests for product-service
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         if: failure()
         with:
           name: screenshots
